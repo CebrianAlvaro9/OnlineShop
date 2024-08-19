@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { MoonIcon } from "./MoonIcon";
 import { SunIcon } from "./SunIcon";
-
 export const ThemeSwitcher = () => {
   const [darkMode, setDarkMode] = useState(true);
 

@@ -1,3 +1,4 @@
+import { Outlet } from "react-router-dom";
 import { ThemeSwitcher } from "./componets/darkmode/ThemeSwitcher";
 
 function App() {
@@ -9,6 +10,9 @@ function App() {
           <ThemeSwitcher />
         </div>
       </header>
+      <div>
+        <Outlet />
+      </div>
     </>
   );
 }
