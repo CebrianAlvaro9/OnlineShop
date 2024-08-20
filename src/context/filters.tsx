@@ -2,7 +2,7 @@ import { createContext, useState, ReactNode } from "react";
 
 interface Filters {
   category: string;
-  price: string;
+  price: number;
   name: string;
 }
 
@@ -15,7 +15,7 @@ interface FiltersContextType {
 export const FiltersContext = createContext<FiltersContextType>({
   filters: {
     category: "",
-    price: "",
+    price: 0,
     name: "",
   },
   setFilters: () => {},
@@ -25,7 +25,7 @@ export const FiltersContext = createContext<FiltersContextType>({
 export function FiltersProvider({ children }: { children: ReactNode }) {
   const [filters, setFilters] = useState<Filters>({
     category: "",
-    price: "",
+    price: 0,
     name: "",
   });
 

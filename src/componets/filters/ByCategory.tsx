@@ -1,10 +1,10 @@
 import { useFilters } from "../../hooks/useFilters";
 
 export const ByCategory = () => {
-  const { setFilters, categories } = useFilters();
+  const { filters, setFilters, categories } = useFilters();
 
   return (
-    <form className="max-w-sm mx-auto">
+    <form className="">
       <label
         form="countries"
         className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -15,11 +15,7 @@ export const ByCategory = () => {
         defaultValue="Select"
         id="category"
         onChange={(e) =>
-          setFilters({
-            category: e.target.value,
-            price: "",
-            name: "",
-          })
+          setFilters({ ...filters, category: e.target.value, price: 0 })
         }
         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
       >
