@@ -1,5 +1,6 @@
-import { createContext, ReactNode, useState } from "react";
+import { createContext, ReactNode, useReducer } from "react";
 import { Product } from "../types/product.type";
+import { initialCartState, reducer } from "../reducers/cart";
 
 interface CartItem extends Product {
   quantity: number;
@@ -8,6 +9,7 @@ interface CartItem extends Product {
 interface CartContextType {
   cart: CartItem[];
   addToCart: (product: Product) => void;
+  decrementQuantity: (product: Product) => void;
   clearCart: () => void;
   removeFromCart: (product: Product) => void;
 }
@@ -15,40 +17,39 @@ interface CartContextType {
 export const CartContext = createContext<CartContextType>({
   cart: [],
   addToCart: () => {},
+  decrementQuantity: () => {},
   clearCart: () => {},
   removeFromCart: () => {},
 });
 
-export function CartProvider({ children }: { children: ReactNode }) {
-  const [cart, setCart] = useState<CartItem[]>([]);
+const useCartReducer = () => {
+  const [state, dispatch] = useReducer(reducer, initialCartState);
 
   const addToCart = (product: Product) => {
-    const productInCart = cart.find((item) => item.id === product.id);
-
-    if (productInCart) {
-      const newCart = cart.map((item) =>
-        item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
-      );
-      return setCart(newCart);
-    }
-
-    setCart((prev) => [...prev, { ...product, quantity: 1 }]);
+    dispatch({ type: "ADD_TO_CART", payload: product });
   };
-
+  const decrementQuantity = (product: Product) => {
+    dispatch({ type: "DECREMENT_QUANTITY", payload: product });
+  };
   const removeFromCart = (product: Product) => {
-    const newCart = cart.filter((item) => item.id !== product.id);
-    setCart(newCart);
+    dispatch({ type: "REMOVE_FROM_CART", payload: product });
   };
 
   const clearCart = () => {
-    setCart([]);
+    dispatch({ type: "CLEAR_CART" });
   };
+  return { state, addToCart, decrementQuantity, clearCart, removeFromCart };
+};
 
+export function CartProvider({ children }: { children: ReactNode }) {
+  const { state, addToCart, decrementQuantity, clearCart, removeFromCart } =
+    useCartReducer();
   return (
     <CartContext.Provider
       value={{
-        cart,
+        cart: state,
         addToCart,
+        decrementQuantity,
         clearCart,
         removeFromCart,
       }}

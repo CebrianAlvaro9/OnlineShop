@@ -5,7 +5,7 @@ import { useCart } from "../../hooks/useCart";
 export const Cart = () => {
   const [modal, setModal] = useState<boolean>(false);
 
-  const { cart, clearCart, addToCart } = useCart();
+  const { cart, clearCart, addToCart, decrementQuantity } = useCart();
 
   return (
     <div>
@@ -34,7 +34,10 @@ export const Cart = () => {
                     </li>
                     <li className="text-lg">{product.title}</li>
                     <li className="flex flex-row gap-2 items-center ">
-                      <span className="border border-black rounded p-2 cursor-pointer">
+                      <span
+                        onClick={() => decrementQuantity(product)}
+                        className="border border-black rounded p-2 cursor-pointer"
+                      >
                         -
                       </span>
                       <span className="text-lg">{product.quantity}</span>
