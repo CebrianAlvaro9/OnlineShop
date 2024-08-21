@@ -1,4 +1,4 @@
-import { useFilters } from "../../hooks/useFilters";
+import { useFilters } from "../../../hooks/useFilters";
 
 export const ByMinPrice = () => {
   const { minPrice, maxPrice, filters, setFilters } = useFilters();

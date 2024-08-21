@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
-import { useFilters } from "../hooks/useFilters";
+import { useFilters } from "../../hooks/useFilters";
 import { Pagination } from "./Pagination";
+import { AddCartButton } from "./addCartButton";
 
 export const ProductList = () => {
   const [page, setPage] = useState(0);
   const NUMBER_OF_PAGES = 10;
-  const { filteredProducts, loading } = useFilters();
+  const { filteredProducts, loading, filters } = useFilters();
 
   useEffect(() => {
     setPage(0);
-  }, [filteredProducts]);
+  }, [filters]);
 
   return (
     <div>
@@ -22,9 +23,10 @@ export const ProductList = () => {
             )
             .map((product) => (
               <ul
-                className="w-48 rounded-lg p-2 dark:bg-stone-700 bg-stone-100"
+                className="w-48 rounded-lg p-2 dark:bg-stone-700 bg-stone-100 relative" // Asegúrate de que sea relative
                 key={product.id}
               >
+                <AddCartButton product={product} />
                 <li>
                   <img className="" src={product.thumbnail} alt="loading" />
                 </li>

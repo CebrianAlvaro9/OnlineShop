@@ -1,7 +1,7 @@
-import { ByCategory } from "../componets/filters/ByCategory";
-import { ByMinPrice } from "../componets/filters/ByMinPrice";
-import { ByName } from "../componets/filters/ByName";
-import { ProductList } from "../componets/ProductList";
+import { ByCategory } from "../componets/home/filters/ByCategory";
+import { ByMinPrice } from "../componets/home/filters/ByMinPrice";
+import { ByName } from "../componets/home/filters/ByName";
+import { ProductList } from "../componets/home/ProductList";
 //https://dummyjson.com/products?limit=10
 
 export const HomePage = () => {

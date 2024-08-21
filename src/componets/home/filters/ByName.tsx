@@ -1,4 +1,4 @@
-import { useFilters } from "../../hooks/useFilters";
+import { useFilters } from "../../../hooks/useFilters";
 
 interface Props {
   setSearchInput: (searchInput: string) => void;

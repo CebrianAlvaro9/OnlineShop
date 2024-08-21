@@ -17,7 +17,7 @@ export const ThemeSwitcher = () => {
       onClick={() => setDarkMode(!darkMode)}
       className="w-8 h-8
               flex items-center justify-center
-              rounded-lg bg-default-100  hover:bg-default-200 border "
+              rounded-lg bg-default-100  hover:bg-default-200 border cursor-pointer "
     >
       {darkMode ? <SunIcon /> : <MoonIcon />}
     </span>

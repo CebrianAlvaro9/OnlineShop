@@ -1,4 +1,4 @@
-import { useFilters } from "../../hooks/useFilters";
+import { useFilters } from "../../../hooks/useFilters";
 
 export const ByCategory = () => {
   const { filters, setFilters, categories } = useFilters();
