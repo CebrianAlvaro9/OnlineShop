@@ -24,3 +24,16 @@ Use `useContext` to avoid passing unnecessary props.
 - [x] Allow the quantity of products in the cart to be modified.
 - [x] Synchronize changes in the cart with the product list.
 - [x] Save the cart in `localStorage` so it can be recovered when the page is reloaded. (bonus points)
+
+//coments for help in the future
+
+https://ui.aceternity.com/components/animated-modal
+
+poner en el div que envuelve todo el modal
+
+  const handleCloseModal = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    // Cierra el modal si el clic fue fuera del contenedor del modal
+    if (e.target === e.currentTarget) {
+      setModal(false);
+    }
+  };
