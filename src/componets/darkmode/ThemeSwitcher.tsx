@@ -15,9 +15,9 @@ export const ThemeSwitcher = () => {
   return (
     <span
       onClick={() => setDarkMode(!darkMode)}
-      className="w-8 h-8
+      className="w-9 h-9
               flex items-center justify-center
-              rounded-lg bg-default-100  hover:bg-default-200 border cursor-pointer "
+              rounded-lg bg-default-100  hover:bg-neutral-100  dark:hover:bg-neutral-700 cursor-pointer "
     >
       {darkMode ? <SunIcon /> : <MoonIcon />}
     </span>

@@ -28,12 +28,3 @@ Use `useContext` to avoid passing unnecessary props.
 //coments for help in the future
 
 https://ui.aceternity.com/components/animated-modal
-
-poner en el div que envuelve todo el modal
-
-  const handleCloseModal = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    // Cierra el modal si el clic fue fuera del contenedor del modal
-    if (e.target === e.currentTarget) {
-      setModal(false);
-    }
-  };

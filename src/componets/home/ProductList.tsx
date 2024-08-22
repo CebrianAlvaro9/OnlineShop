@@ -23,7 +23,7 @@ export const ProductList = () => {
             )
             .map((product) => (
               <ul
-                className="w-48 rounded-lg p-2 dark:bg-stone-700 bg-stone-100 relative" // Asegúrate de que sea relative
+                className="w-48 rounded-lg p-2 dark:bg-neutral-900 dark:border dark:border-neutral-800  bg-stone-100 relative" // Asegúrate de que sea relative
                 key={product.id}
               >
                 <AddCartButton product={product} />
