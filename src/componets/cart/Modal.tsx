@@ -25,10 +25,10 @@ export const Modal = ({ setModal }: Props) => {
   return (
     <div
       onClick={handleCloseModal}
-      className=" zoom-in fixed inset-0 flex items-center justify-center z-20"
+      className=" fixed inset-0 flex items-center justify-center z-20 bg-neutral-800 bg-opacity-90"
     >
       <div
-        className="modal-overlay  shadow-lg shadow-neutral-300 dark:shadow-neutral-900 overflow-hidden bg-slate-50 dark:bg-neutral-900 min-h-fit md:w-3/6 m-4 rounded-2xl relative z-30 border border-neutral-200 dark:border-neutral-700 transform transition-all duration-300 ${
+        className=" zoom-in    overflow-hidden bg-slate-50 dark:bg-neutral-900 min-h-fit md:w-3/6 m-4 rounded-2xl relative z-30 border border-neutral-200 dark:border-neutral-700 transform transition-all duration-300 ${
              "
       >
         <span
