@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useFilters } from "../../hooks/useFilters";
 import { Pagination } from "./Pagination";
 import { AddCartButton } from "./addCartButton";
@@ -14,7 +14,7 @@ export const ProductList = () => {
 
   return (
     <div>
-      <div className="pt-4 flex flex-wrap gap-5 justify-center">
+      <ul className="pt-4 flex flex-wrap gap-5 justify-center">
         {filteredProducts && filteredProducts.length > 0 ? (
           filteredProducts
             .slice(
@@ -22,24 +22,31 @@ export const ProductList = () => {
               NUMBER_OF_PAGES * page + NUMBER_OF_PAGES
             )
             .map((product) => (
-              <ul
-                className="w-48 rounded-lg p-2 dark:bg-neutral-900 dark:border dark:border-neutral-800  bg-stone-100 relative" // Asegúrate de que sea relative
+              <li
+                className="w-72  shadow-xl rounded-lg p-4 dark:bg-neutral-900 dark:border dark:border-neutral-800  bg-white relative" // Asegúrate de que sea relative
                 key={product.id}
               >
-                <AddCartButton product={product} />
-                <li>
-                  <img className="" src={product.thumbnail} alt="loading" />
-                </li>
+                <div className="py-12 flex items-center justify-center">
+                  <img
+                    className="aspect-square object-cover w-56 "
+                    src={product.images[0]}
+                    alt={product.title}
+                    loading="lazy"
+                  />
+                </div>
                 <li>{product.title}</li>
-                <li>{product.price} $</li>
-              </ul>
+                <div className="flex items-center  w-full mt-8 justify-between">
+                  <p>{product.price} $</p>
+                  <AddCartButton product={product} />
+                </div>
+              </li>
             ))
         ) : (
           <p className="text-center dark:text-white">
             {loading ? "Loading..." : "No products found"}
           </p>
         )}
-      </div>
+      </ul>
       {filteredProducts.length > 10 && (
         <Pagination
           length={filteredProducts.length}

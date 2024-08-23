@@ -14,13 +14,11 @@ export const AddCartButton = ({ product }: { product: Product }) => {
         }
         className={`${
           isProductInCart
-            ? "bg-red-500 hover:bg-red-800"
-            : "bg-emerald-500 hover:bg-emerald-800"
-        }  select-none absolute top-[-4px] left-[-4px]  text-black rounded-full w-6 h-6 flex justify-center items-center  focus:outline-none`}
+            ? "dark:bg-neutral-950 bg-neutral-700 hover:bg-neutral-800  text-white dark:text-white"
+            : "bg-neutral-100 hover:bg-neutral-200 dark:hover:bg-neutral-400 text-black dark:text-black"
+        }     rounded-lg p-2 flex justify-center items-center  focus:outline-none `}
       >
-        <p className=" font-extrabold text-xl ">
-          {isProductInCart ? "-" : "+"}
-        </p>
+        {isProductInCart ? "- Remove" : "+ Add to Cart "}
       </button>
     </>
   );
