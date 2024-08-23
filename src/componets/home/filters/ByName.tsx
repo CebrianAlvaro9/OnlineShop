@@ -1,8 +1,5 @@
 import { useFilters } from "../../../hooks/useFilters";
 
-interface Props {
-  setSearchInput: (searchInput: string) => void;
-}
 export const ByName = () => {
   const { filters, setFilters } = useFilters();
 

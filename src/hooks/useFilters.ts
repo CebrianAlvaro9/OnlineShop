@@ -1,4 +1,4 @@
-import { useContext, useMemo, useState } from "react";
+import { useContext, useMemo } from "react";
 import { FiltersContext } from "../context/filters";
 import { useFetchApi } from "./useFetchApi";
 

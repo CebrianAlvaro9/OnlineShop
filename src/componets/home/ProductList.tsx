@@ -1,7 +1,8 @@
-import { Suspense, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useFilters } from "../../hooks/useFilters";
 import { Pagination } from "./Pagination";
-import { AddCartButton } from "./addCartButton";
+import { AddCartButton } from "./AddCartButton";
+import { LazyImage } from "./LazyImage";
 
 export const ProductList = () => {
   const [page, setPage] = useState(0);
@@ -27,12 +28,7 @@ export const ProductList = () => {
                 key={product.id}
               >
                 <div className="py-12 flex items-center justify-center">
-                  <img
-                    className="aspect-square object-cover w-56 "
-                    src={product.images[0]}
-                    alt={product.title}
-                    loading="lazy"
-                  />
+                  <LazyImage product={product} />
                 </div>
                 <li>{product.title}</li>
                 <div className="flex items-center  w-full mt-8 justify-between">
