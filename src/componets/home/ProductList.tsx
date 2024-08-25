@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
 import { useFilters } from "../../hooks/useFilters";
 import { Pagination } from "./Pagination";
-import { AddCartButton } from "./AddCartButton";
-import { LazyImage } from "./LazyImage";
+import { ProductItem } from "./ProductItem";
 
 export const ProductList = () => {
   const [page, setPage] = useState(0);
   const NUMBER_OF_PAGES = 10;
   const { filteredProducts, loading, filters } = useFilters();
-
+  const darkMode = JSON.parse(
+    window.sessionStorage.getItem("darkMode") as string
+  );
   useEffect(() => {
     setPage(0);
   }, [filters]);
@@ -23,19 +24,11 @@ export const ProductList = () => {
               NUMBER_OF_PAGES * page + NUMBER_OF_PAGES
             )
             .map((product) => (
-              <li
-                className="w-72  shadow-xl rounded-lg p-4 dark:bg-neutral-900 dark:border dark:border-neutral-800  bg-white relative" // Asegúrate de que sea relative
+              <ProductItem
                 key={product.id}
-              >
-                <div className="py-12 flex items-center justify-center">
-                  <LazyImage product={product} />
-                </div>
-                <li>{product.title}</li>
-                <div className="flex items-center  w-full mt-8 justify-between">
-                  <p>{product.price} $</p>
-                  <AddCartButton product={product} />
-                </div>
-              </li>
+                product={product}
+                darkMode={darkMode}
+              />
             ))
         ) : (
           <p className="text-center dark:text-white">
