@@ -2,6 +2,7 @@ import { ByCategory } from "../componets/home/filters/ByCategory";
 import { ByMinPrice } from "../componets/home/filters/ByMinPrice";
 import { ByName } from "../componets/home/filters/ByName";
 import { ProductList } from "../componets/home/ProductList";
+import { PaginationProvider } from "../context/pagination";
 //https://dummyjson.com/products?limit=10
 
 export const HomePage = () => {
@@ -13,7 +14,9 @@ export const HomePage = () => {
         <ByMinPrice />
       </div>
       <section>
-        <ProductList />
+        <PaginationProvider>
+          <ProductList />
+        </PaginationProvider>
       </section>
     </div>
   );

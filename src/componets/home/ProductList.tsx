@@ -1,25 +1,31 @@
 import { useEffect, useState } from "react";
 import { useFilters } from "../../hooks/useFilters";
-import { Pagination } from "./Pagination";
+import { Pagination } from "./pagination/Pagination";
 import { ProductItem } from "./ProductItem";
+import { usePagination } from "../../hooks/usePagination";
 
 export const ProductList = () => {
-  const [page, setPage] = useState(0);
-  const [numberOfItems, setNumberOfItems] = useState(10);
+  // const [page, setPage] = useState(0);
+  // const [numberOfItems, setNumberOfItems] = useState(10);
+
+  const { page, numberOfItems, setPage } = usePagination();
   const { filteredProducts, loading, filters } = useFilters();
   const darkMode = JSON.parse(
     window.sessionStorage.getItem("darkMode") as string
   );
   useEffect(() => {
-    setPage(0);
+    setPage(1);
   }, [filters]);
 
   return (
     <div>
-      <ul className="pt-4 flex flex-wrap gap-5 justify-center">
+      <ul className="pt-4 flex flex-wrap gap-5 justify-center ">
         {filteredProducts && filteredProducts.length > 0 ? (
           filteredProducts
-            .slice(numberOfItems * page, numberOfItems * page + numberOfItems)
+            .slice(
+              numberOfItems * (page - 1),
+              numberOfItems * (page - 1) + numberOfItems
+            )
             .map((product) => (
               <ProductItem
                 key={product.id}
@@ -33,15 +39,7 @@ export const ProductList = () => {
           </p>
         )}
       </ul>
-      {filteredProducts.length > numberOfItems && (
-        <Pagination
-          length={filteredProducts.length}
-          page={page}
-          setPage={setPage}
-          numberOfItems={numberOfItems}
-          setNumberOfItems={setNumberOfItems}
-        />
-      )}
+      {filteredProducts.length > numberOfItems && <Pagination />}
     </div>
   );
 };
