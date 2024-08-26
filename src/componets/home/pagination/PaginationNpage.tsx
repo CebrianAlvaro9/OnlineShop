@@ -11,13 +11,15 @@ export const PaginationNpage = () => {
 
   const startPage = Math.max(1, page - 3); // 3 páginas anteriores
   const endPage = Math.min(totalPages, page + 3); // 3 páginas posteriores
+
+  console.log(totalPages);
+  console.log(page);
   for (let i = startPage; i <= endPage; i++) {
     paginationItems.push(
       <li key={i}>
         <a
-          href="#"
           aria-current={page === i ? "page" : undefined}
-          className={`z-10 flex items-center justify-center px-3 h-8 leading-tight 
+          className={` z-10 flex items-center justify-center px-3 h-8 leading-tight 
                       ${
                         page === i
                           ? "text-blue-600 border dark:border-neutral-900 dark:bg-black border-blue-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700"
@@ -37,8 +39,9 @@ export const PaginationNpage = () => {
       <ul className="flex  items-center -space-x-px h-12 text-sm">
         <li onClick={() => setPage(page > 1 ? page - 1 : page)}>
           <a
-            href="#"
-            className="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-neutral-500 bg-white border border-e-0 border-neutral-300 rounded-s-lg hover:bg-neutral-100 hover:text-neutral-700 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-white"
+            className={`${
+              page === 1 ? "cursor-not-allowed  " : ""
+            } flex items-center justify-center px-3 h-8 ms-0 leading-tight text-neutral-500 bg-white border border-e-0 border-neutral-300 rounded-s-lg hover:bg-neutral-100 hover:text-neutral-700 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-white`}
           >
             <span className="sr-only">Previous</span>
             <svg
@@ -73,8 +76,9 @@ export const PaginationNpage = () => {
 
         <li onClick={() => setPage(totalPages > page + 1 ? page + 1 : page)}>
           <a
-            href="#"
-            className="flex items-center justify-center px-3 h-8 leading-tight text-neutral-500 bg-white border border-neutral-300 rounded-e-lg hover:bg-neutral-100 hover:text-neutral-700 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-white"
+            className={`${
+              totalPages === page ? "cursor-not-allowed  " : ""
+            }  flex items-center justify-center px-3 h-8 leading-tight text-neutral-500 bg-white border border-neutral-300 rounded-e-lg hover:bg-neutral-100 hover:text-neutral-700 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-white`}
           >
             <span className="sr-only">Next</span>
             <svg
