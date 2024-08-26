@@ -2,12 +2,14 @@ import React from "react";
 import { useCart } from "../../hooks/useCart";
 import { CloseIcon } from "./CloseIcon";
 import "./cart.css";
+import { CartItem } from "./CartItem";
 interface Props {
   setModal: (modal: boolean) => void;
 }
 
 export const Modal = ({ setModal }: Props) => {
-  const { cart, clearCart, addToCart, decrementQuantity } = useCart();
+  const { cart, clearCart, addToCart, decrementQuantity, removeFromCart } =
+    useCart();
 
   const handleCloseModal = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>
@@ -22,13 +24,14 @@ export const Modal = ({ setModal }: Props) => {
     (total, product) => total + product.price * product.quantity,
     0
   );
+
   return (
     <div
       onClick={handleCloseModal}
       className=" fixed inset-0 flex items-center justify-center z-20 bg-neutral-800 bg-opacity-90"
     >
       <div
-        className=" zoom-in    overflow-hidden bg-slate-50 dark:bg-neutral-900 min-h-fit md:w-3/6 m-4 rounded-2xl relative z-30 border border-neutral-200 dark:border-neutral-700 transform transition-all duration-300 ${
+        className=" zoom-in    overflow-hidden bg-slate-50 dark:bg-neutral-900 min-h-fit md:w-5/6 xlo:w-4/6  2xl:w-3/6 lg:w:4/6 m-4 rounded-2xl relative z-30 border border-neutral-200 dark:border-neutral-700 transform transition-all duration-300 ${
              "
       >
         <span
@@ -52,33 +55,12 @@ export const Modal = ({ setModal }: Props) => {
               <div>
                 <ul className=" p-2 dark:text-white md:text-lg overflow-y-auto max-h-[55vh]	  ">
                   {cart.map((product) => (
-                    <li
-                      className="flex flex-row items-center justify-between py-0.5"
-                      key={product.id}
-                    >
-                      <img className="w-14" src={product.thumbnail} alt="" />
-
-                      <span>{product.title}</span>
-
-                      <div className="flex flex-row gap-3 items-center ">
-                        <span>
-                          {(product.price * product.quantity).toFixed(2)} $
-                        </span>
-                        <span
-                          onClick={() => decrementQuantity(product)}
-                          className="dark:bg-neutral-100 bg-neutral-900 text-white dark:text-black font-bold rounded px-2 cursor-pointer"
-                        >
-                          -
-                        </span>
-                        <span className="text-lg">{product.quantity}</span>
-                        <span
-                          onClick={() => addToCart(product)}
-                          className="dark:bg-neutral-100 bg-neutral-900 text-white dark:text-black font-bold rounded px-2  cursor-pointer"
-                        >
-                          +
-                        </span>
-                      </div>
-                    </li>
+                    <CartItem
+                      product={product}
+                      addToCart={addToCart}
+                      decrementQuantity={decrementQuantity}
+                      removeFromCart={removeFromCart}
+                    />
                   ))}
                 </ul>
               </div>

@@ -1,13 +1,9 @@
 import { createContext, ReactNode, useReducer } from "react";
-import { Product } from "../types/product.type";
+import { Product, Products } from "../types/product.type";
 import { initialCartState, reducer } from "../reducers/cart";
 
-interface CartItem extends Product {
-  quantity: number;
-}
-
 interface CartContextType {
-  cart: CartItem[];
+  cart: Product[];
   addToCart: (product: Product) => void;
   decrementQuantity: (product: Product) => void;
   clearCart: () => void;

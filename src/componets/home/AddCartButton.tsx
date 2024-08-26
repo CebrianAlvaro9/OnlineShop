@@ -18,7 +18,7 @@ export const AddCartButton = ({ product }: { product: Product }) => {
             : "bg-neutral-100 hover:bg-neutral-200 dark:hover:bg-neutral-400 text-black dark:text-black"
         }     rounded-lg p-2 flex justify-center items-center  focus:outline-none `}
       >
-        {isProductInCart ? "- Remove" : "+ Add to Cart "}
+        {isProductInCart ? "Remove" : "Add to Cart "}
       </button>
     </>
   );

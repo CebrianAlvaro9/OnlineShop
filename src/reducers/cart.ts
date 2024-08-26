@@ -41,10 +41,6 @@ export const reducer = (state: CartItem[], action: any) => {
           );
           updateLocalStorage(newState);
           return newState;
-        } else {
-          const newState = state.filter((item) => item.id !== id);
-          updateLocalStorage(newState);
-          return newState;
         }
       }
       return state;

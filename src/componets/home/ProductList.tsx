@@ -5,7 +5,7 @@ import { ProductItem } from "./ProductItem";
 
 export const ProductList = () => {
   const [page, setPage] = useState(0);
-  const NUMBER_OF_PAGES = 10;
+  const [numberOfItems, setNumberOfItems] = useState(10);
   const { filteredProducts, loading, filters } = useFilters();
   const darkMode = JSON.parse(
     window.sessionStorage.getItem("darkMode") as string
@@ -19,10 +19,7 @@ export const ProductList = () => {
       <ul className="pt-4 flex flex-wrap gap-5 justify-center">
         {filteredProducts && filteredProducts.length > 0 ? (
           filteredProducts
-            .slice(
-              NUMBER_OF_PAGES * page,
-              NUMBER_OF_PAGES * page + NUMBER_OF_PAGES
-            )
+            .slice(numberOfItems * page, numberOfItems * page + numberOfItems)
             .map((product) => (
               <ProductItem
                 key={product.id}
@@ -36,12 +33,13 @@ export const ProductList = () => {
           </p>
         )}
       </ul>
-      {filteredProducts.length > 10 && (
+      {filteredProducts.length > numberOfItems && (
         <Pagination
           length={filteredProducts.length}
           page={page}
           setPage={setPage}
-          NUMBER_OF_PAGES={NUMBER_OF_PAGES}
+          numberOfItems={numberOfItems}
+          setNumberOfItems={setNumberOfItems}
         />
       )}
     </div>
