@@ -56,6 +56,7 @@ export const Modal = ({ setModal }: Props) => {
                 <ul className=" p-2 dark:text-white md:text-lg overflow-y-auto max-h-[55vh]	  ">
                   {cart.map((product) => (
                     <CartItem
+                      key={product.id}
                       product={product}
                       addToCart={addToCart}
                       decrementQuantity={decrementQuantity}
