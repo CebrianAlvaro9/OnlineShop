@@ -5,13 +5,13 @@ export const ByName = () => {
 
   return (
     <div>
-      <p>Search By title</p>
       <input
         onChange={(e) =>
           setFilters({ ...filters, price: 0, name: e.target.value })
         }
         type="text"
-        className="w-full p-1 border border-gray-300 rounded dark:text-black"
+        className="w-full p-1.5 border border-gray-300 rounded dark:text-black"
+        placeholder="Search..."
       />
     </div>
   );

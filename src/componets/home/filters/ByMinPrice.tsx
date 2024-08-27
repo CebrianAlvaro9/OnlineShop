@@ -4,14 +4,17 @@ export const ByMinPrice = () => {
   const { minPrice, maxPrice, filters, setFilters } = useFilters();
   return (
     <div className="">
-      <label
+      {/* <label
         htmlFor="default-range"
         className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
       >
-        Price {minPrice}$ min. {maxPrice}$ max.
-      </label>
+        {minPrice}$ min. {maxPrice}$ max.
+      </label> */}
 
-      <div className="flex items-center gap-2 ">
+      <div className="flex items-center gap-1 ">
+        <p className="text-sm font-medium text-gray-900 dark:text-white">
+          Price:
+        </p>
         <input
           className="range w-full accent-slate-900 dark:accent-slate-50"
           type="range"

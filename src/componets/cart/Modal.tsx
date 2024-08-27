@@ -31,7 +31,7 @@ export const Modal = ({ setModal }: Props) => {
       className=" fixed inset-0 flex items-center justify-center z-20 bg-neutral-800 bg-opacity-90"
     >
       <div
-        className=" zoom-in    overflow-hidden bg-slate-50 dark:bg-neutral-900 min-h-fit md:w-5/6 xlo:w-4/6  2xl:w-3/6 lg:w:4/6 m-4 rounded-2xl relative z-30 border border-neutral-200 dark:border-neutral-700 transform transition-all duration-300 ${
+        className=" zoom-in overflow-hidden bg-slate-50 dark:bg-neutral-900 min-h-fit w-full md:w-5/6 xl:w-4/6  2xl:w-3/6 lg:w:4/6 m-4 rounded-2xl relative z-30 border border-neutral-200 dark:border-neutral-700 transform transition-all duration-300 ${
              "
       >
         <span

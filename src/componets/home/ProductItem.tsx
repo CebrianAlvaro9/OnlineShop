@@ -22,7 +22,7 @@ export const ProductItem = ({ product, darkMode }: Props) => {
             title={product.title}
           />
         </div>
-        <li className=" ">{product.title.slice(0, 30)}</li>
+        <span className=" ">{product.title.slice(0, 30)}</span>
         <div className="flex items-center  w-full mt-8 justify-between">
           <p className="text-sm font-light ">{product.price} $</p>
           <AddCartButton product={product} />

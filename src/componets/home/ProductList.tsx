@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useFilters } from "../../hooks/useFilters";
 import { Pagination } from "./pagination/Pagination";
 import { ProductItem } from "./ProductItem";

@@ -12,8 +12,6 @@ export const PaginationNpage = () => {
   const startPage = Math.max(1, page - 3); // 3 páginas anteriores
   const endPage = Math.min(totalPages, page + 3); // 3 páginas posteriores
 
-  console.log(totalPages);
-  console.log(page);
   for (let i = startPage; i <= endPage; i++) {
     paginationItems.push(
       <li key={i}>
@@ -53,9 +51,9 @@ export const PaginationNpage = () => {
             >
               <path
                 stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 d="M5 1 1 5l4 4"
               />
             </svg>
@@ -90,8 +88,8 @@ export const PaginationNpage = () => {
             >
               <path
                 stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
                 strokeWidth="2"
                 d="m1 9 4-4-4-4"
               />

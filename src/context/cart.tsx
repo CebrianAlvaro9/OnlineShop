@@ -1,5 +1,5 @@
 import { createContext, ReactNode, useReducer } from "react";
-import { Product, Products } from "../types/product.type";
+import { Product } from "../types/product.type";
 import { initialCartState, reducer } from "../reducers/cart";
 
 interface CartContextType {
