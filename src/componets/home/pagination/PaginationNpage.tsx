@@ -21,7 +21,7 @@ export const PaginationNpage = () => {
                       ${
                         page === i
                           ? "text-blue-600 border dark:border-neutral-900 dark:bg-black border-blue-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700"
-                          : "text-neutral-500 border border-neutral-300 bg-white hover:bg-neutral-100 hover:text-neutral-900"
+                          : "text-neutral-500 border dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-white border-neutral-300 bg-white hover:bg-neutral-100 hover:text-neutral-900"
                       } 
                       dark:border-neutral-700 dark:bg-neutral-700 dark:text-white`}
           onClick={() => setPage(i)}
