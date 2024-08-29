@@ -8,20 +8,20 @@ import { HomePage } from "./Pages/HomePage";
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "OnlineShop",
     element: <App />,
     children: [
       {
-        path: "/",
+        path: "",
         element: <HomePage />,
       },
       {
-        path: "/home",
+        path: "home",
         element: <HomePage />,
       },
       {
         path: "*",
-        element: <Navigate to={"/home"} replace={true} />,
+        element: <Navigate to={"home"} replace={true} />,
       },
     ],
   },
