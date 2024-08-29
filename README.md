@@ -1,6 +1,6 @@
 # Task
 
-dev
+dev1
 
 ## Ecommerce
 
@@ -24,3 +24,7 @@ Use `useContext` to avoid passing unnecessary props.
 - [x] Allow the quantity of products in the cart to be modified.
 - [x] Synchronize changes in the cart with the product list.
 - [x] Save the cart in `localStorage` so it can be recovered when the page is reloaded. (bonus points)
+
+//coments for help in the future
+
+https://ui.aceternity.com/components/animated-modal
