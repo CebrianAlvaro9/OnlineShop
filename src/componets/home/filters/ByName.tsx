@@ -4,14 +4,18 @@ export const ByName = () => {
   const { filters, setFilters } = useFilters();
 
   return (
-    <div>
+    <div className="filter-field filter-field--search">
+      <label className="filter-label" htmlFor="product-search">
+        Search
+      </label>
       <input
-        onChange={(e) =>
-          setFilters({ ...filters, price: 0, name: e.target.value })
+        id="product-search"
+        type="search"
+        value={filters.name}
+        onChange={(event) =>
+          setFilters({ ...filters, price: 0, name: event.target.value })
         }
-        type="text"
-        className="w-full p-1.5 border border-gray-300 rounded dark:text-black"
-        placeholder="Search..."
+        placeholder="Search the collection"
       />
     </div>
   );

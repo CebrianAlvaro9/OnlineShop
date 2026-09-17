@@ -1,18 +1,5 @@
-@keyframes zoomIn {
-    0% {
-      opacity: 0;
-      transform: scale(0.5);
-    }
-    100% {
-      opacity: 1;
-      transform: scale(1);
-    }
+@media (prefers-reduced-motion: reduce) {
+  .cart-drawer {
+    animation: none;
   }
-  
-  .zoom-in {
-    animation: zoomIn 0.3s ease-out;
-  }
-
-  .modal-overlay {
-    transition: background-color 0.3s ease, opacity 0.3s ease;
-  }
+}

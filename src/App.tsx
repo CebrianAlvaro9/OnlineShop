@@ -6,35 +6,33 @@ import { CartProvider } from "./context/cart";
 
 function App() {
   return (
-    <>
-      <CartProvider>
-        <div className="p-5">
-          <header className="pb-4 flex flex-row  items-center justify-center gap-2 md:gap-12 content-center">
-            {/* <h1 className="text-4xl font-bold dark:text-slate-50 ">
-              Nova Store
-            </h1> */}
+    <CartProvider>
+      <div className="store-shell">
+        <header className="store-header" aria-label="Store navigation">
+          <a className="brand-link" href="/OnlineShop">
+            <span className="brand-mark" aria-hidden="true">
+              n/
+            </span>
+            <span className="brand-copy">
+              <strong>Nov Market</strong>
+              <span>Everyday, curated</span>
+            </span>
+          </a>
 
-            <h1 className="flex items-center text-5xl font-extrabold dark:text-white">
-              Nov
-              <span className="bg-blue-100 text-blue-800 text-2xl font-semibold me-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ms-2">
-                Market
-              </span>
-            </h1>
+          <div className="store-header__meta">
+            <span className="store-header__note">Curated goods for modern living</span>
+            <ThemeSwitcher />
+            <Cart />
+          </div>
+        </header>
 
-            <div>
-              <ThemeSwitcher />
-            </div>
-
-            <div>
-              <Cart />
-            </div>
-          </header>
+        <main className="store-main">
           <FiltersProvider>
             <Outlet />
           </FiltersProvider>
-        </div>
-      </CartProvider>
-    </>
+        </main>
+      </div>
+    </CartProvider>
   );
 }
 

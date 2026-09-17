@@ -1,32 +1,30 @@
 import { useEffect, useState } from "react";
 import { MoonIcon } from "./MoonIcon";
 import { SunIcon } from "./SunIcon";
+
 export const ThemeSwitcher = () => {
   const [darkMode, setDarkMode] = useState(
     JSON.parse(window.sessionStorage.getItem("darkMode") as string) || false
   );
 
-  const toggleDarkMode = (darkMode: boolean) => {
-    setDarkMode(darkMode);
-    window.sessionStorage.setItem("darkMode", JSON.stringify(darkMode));
+  const toggleDarkMode = (nextDarkMode: boolean) => {
+    setDarkMode(nextDarkMode);
+    window.sessionStorage.setItem("darkMode", JSON.stringify(nextDarkMode));
   };
 
   useEffect(() => {
-    if (darkMode) {
-      document.querySelector("html")?.classList.add("dark");
-    } else {
-      document.querySelector("html")?.classList.remove("dark");
-    }
+    document.documentElement.classList.toggle("dark", darkMode);
   }, [darkMode]);
 
   return (
-    <span
+    <button
+      type="button"
+      aria-label={darkMode ? "Switch to light theme" : "Switch to dark theme"}
+      title={darkMode ? "Switch to light theme" : "Switch to dark theme"}
+      className="theme-toggle"
       onClick={() => toggleDarkMode(!darkMode)}
-      className="w-9 h-9
-              flex items-center justify-center
-              rounded-lg bg-default-100  hover:bg-neutral-100  dark:hover:bg-neutral-700 cursor-pointer "
     >
       {darkMode ? <SunIcon /> : <MoonIcon />}
-    </span>
+    </button>
   );
 };

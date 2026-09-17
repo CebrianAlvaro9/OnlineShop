@@ -2,35 +2,30 @@ import { useFilters } from "../../../hooks/useFilters";
 
 export const ByMinPrice = () => {
   const { minPrice, maxPrice, filters, setFilters } = useFilters();
-  return (
-    <div className="">
-      {/* <label
-        htmlFor="default-range"
-        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-      >
-        {minPrice}$ min. {maxPrice}$ max.
-      </label> */}
+  const minimum = typeof minPrice === "number" ? minPrice : 0;
+  const maximum = typeof maxPrice === "number" ? maxPrice : 0;
 
-      <div className="flex items-center gap-1 ">
-        <p className="text-sm font-medium text-gray-900 dark:text-white">
-          Price:
-        </p>
+  return (
+    <div className="filter-field">
+      <label className="filter-label" htmlFor="minimum-price">
+        Minimum price
+      </label>
+      <div className="filter-control">
         <input
-          className="range w-full accent-slate-900 dark:accent-slate-50"
+          id="minimum-price"
           type="range"
-          min={minPrice ? minPrice : 0}
-          max={maxPrice ? maxPrice : 0}
+          min={minimum}
+          max={maximum}
           step="1"
           value={filters.price}
-          onChange={(e) =>
-            setFilters({ ...filters, price: parseInt(e.target.value) })
+          disabled={!maximum}
+          onChange={(event) =>
+            setFilters({ ...filters, price: Number(event.target.value) })
           }
         />
-        {filters.price > 0 && (
-          <div className="text-sm font-medium text-gray-900 dark:text-white ">
-            {filters.price}$
-          </div>
-        )}
+        <output htmlFor="minimum-price">
+          {filters.price > 0 ? `${filters.price}$` : "Any"}
+        </output>
       </div>
     </div>
   );

@@ -11,7 +11,7 @@ interface Props {
 export const LazyLoadImageComponent = ({ url, title, darkMode }: Props) => {
   return (
     <LazyLoadImage
-      className="aspect-square object-cover w-56"
+      className="product-image"
       alt={title}
       src={url}
       effect="blur"

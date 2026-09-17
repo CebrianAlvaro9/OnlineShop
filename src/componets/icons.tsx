@@ -86,7 +86,7 @@ export function CartIcon({ dimensions = "20" }: PropsCartIcon) {
       fill="none"
       strokeLinecap="round"
       strokeLinejoin="round"
-      className="dark:stroke-black stroke-white cursor-pointer"
+      className="stroke-current cursor-pointer"
     >
       <path stroke="none" d="M0 0h24v24H0z" fill="none" />
       <path d="M6 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />

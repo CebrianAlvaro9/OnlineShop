@@ -4,18 +4,20 @@ interface CartItem extends Product {
   quantity: number;
 }
 
+type CartAction =
+  | { type: "ADD_TO_CART" | "DECREMENT_QUANTITY" | "REMOVE_FROM_CART"; payload: Product }
+  | { type: "CLEAR_CART" };
+
 export const updateLocalStorage = (cart: CartItem[]) => {
   window.localStorage.setItem("cart", JSON.stringify(cart));
 };
 
 export const initialCartState: CartItem[] =
   JSON.parse(window.localStorage.getItem("cart") as string) || [];
-export const reducer = (state: CartItem[], action: any) => {
-  const { type: actionType, payload: actionPayload } = action;
-
-  switch (actionType) {
+export const reducer = (state: CartItem[], action: CartAction) => {
+  switch (action.type) {
     case "ADD_TO_CART": {
-      const { id } = actionPayload;
+      const { id } = action.payload;
       const productInCart = state.find((item) => item.id === id);
 
       if (productInCart) {
@@ -26,12 +28,12 @@ export const reducer = (state: CartItem[], action: any) => {
         return newState;
       }
 
-      const newState = [...state, { ...actionPayload, quantity: 1 }];
+      const newState = [...state, { ...action.payload, quantity: 1 }];
       updateLocalStorage(newState);
       return newState;
     }
     case "DECREMENT_QUANTITY": {
-      const { id } = actionPayload;
+      const { id } = action.payload;
       const productInCart = state.find((item) => item.id === id);
 
       if (productInCart) {
