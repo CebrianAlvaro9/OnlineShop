@@ -12,7 +12,7 @@
 
 - Publish under the repository path `/OnlineShop/`.
 - Use `npm ci` in CI for reproducible dependency installation.
-- Use the official `actions/upload-pages-artifact@v3` and `actions/deploy-pages@v4` actions.
+- Use the official `actions/configure-pages@v5`, `actions/upload-pages-artifact@v4`, and `actions/deploy-pages@v4` actions.
 - Keep Pages permissions minimal: `contents: read`, `pages: write`, and `id-token: write`.
 - Preserve `docs/superpowers` while regenerating the site under `docs/`.
 - Do not keep a second active manual deployment path through `gh-pages`.
@@ -20,6 +20,7 @@
 ## File Map
 
 - Create: `tests/deploy-workflow.test.mjs` — static contract tests for the build base path, scripts, and Pages workflow.
+- Create: `scripts/prepare-pages.mjs` — remove only generated files from the tracked Pages directory before each build.
 - Modify: `vite.config.ts` — set the project base path and `docs` output directory.
 - Modify: `package.json` — remove the obsolete `gh-pages` deployment script and dependency.
 - Modify: `package-lock.json` — regenerate the lockfile after removing `gh-pages`.
@@ -125,14 +126,32 @@ export default defineConfig({
 
 `emptyOutDir: false` is required because `docs/superpowers` contains the committed design and implementation documentation that must survive a site build.
 
-- [ ] **Step 2: Remove the obsolete manual deployment entries**
+- [ ] **Step 2: Add the bounded Pages cleanup**
 
-Update the `scripts` and `devDependencies` in `package.json` so they become:
+Create `scripts/prepare-pages.mjs`:
+
+```js
+import { rmSync } from "node:fs"
+import { dirname, resolve } from "node:path"
+import { fileURLToPath } from "node:url"
+
+const projectRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..")
+
+for (const generatedPath of ["docs/assets", "docs/index.html", "docs/vite.svg"]) {
+  rmSync(resolve(projectRoot, generatedPath), { force: true, recursive: true })
+}
+```
+
+This removes only Vite-generated files and leaves `docs/superpowers` untouched.
+
+- [ ] **Step 3: Remove the obsolete manual deployment entries**
+
+Update the `scripts` and `devDependencies` in `package.json` so the scripts become:
 
 ```json
 "scripts": {
   "dev": "vite",
-  "build": "tsc -b && vite build",
+  "build": "tsc -b && node scripts/prepare-pages.mjs && vite build",
   "lint": "eslint .",
   "preview": "vite preview"
 }
@@ -140,22 +159,22 @@ Update the `scripts` and `devDependencies` in `package.json` so they become:
 
 Remove only `predeploy`, `deploy`, and the `gh-pages` dev dependency. Keep the remaining dependencies and versions unchanged.
 
-- [ ] **Step 3: Regenerate the lockfile**
+- [ ] **Step 4: Regenerate the lockfile**
 
 Run: `npm uninstall --package-lock-only gh-pages`
 
 Expected: `package-lock.json` no longer contains the `gh-pages` package while the rest of the dependency graph remains intact.
 
-- [ ] **Step 4: Run the focused contract test**
+- [ ] **Step 5: Run the focused contract test**
 
 Run: `node --test tests/deploy-workflow.test.mjs`
 
 Expected: the Vite and npm tests pass; the workflow test remains the only failing test until Task 3 creates the workflow.
 
-- [ ] **Step 5: Commit the build configuration**
+- [ ] **Step 6: Commit the build configuration**
 
 ```bash
-git add vite.config.ts package.json package-lock.json
+git add scripts/prepare-pages.mjs vite.config.ts package.json package-lock.json
 git commit -m "build: target tracked GitHub Pages output"
 ```
 
@@ -208,8 +227,11 @@ jobs:
       - name: Build site
         run: npm run build
 
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
       - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
           path: docs
 
@@ -283,4 +305,3 @@ Expected: only the deployment test, Vite/package configuration, workflow, and re
 git add docs
 git commit -m "build: refresh GitHub Pages artifact"
 ```
-

@@ -42,11 +42,14 @@ separado.
 - `vite.config.ts` usará `base: "/OnlineShop/"`, una ruta relativa al dominio de
   GitHub Pages y válida tanto en el build como en la vista previa local.
 - El script `build` ejecutará TypeScript y Vite con `outDir: "docs"`, de modo que el
-  HTML y los assets publicados se regeneren en el directorio que Pages consume.
+  HTML y los assets publicados se regeneren en el directorio que Pages consume. Antes
+  del build, una limpieza acotada eliminará solo los artefactos generados anteriores y
+  conservará `docs/superpowers`.
 - El workflow `.github/workflows/deploy-pages.yml` se ejecutará en pushes a `main` y
   manualmente. Sus pasos serán checkout, instalación reproducible con `npm ci`,
-  build, subida del artefacto `docs` y despliegue mediante las acciones oficiales de
-  GitHub Pages.
+  configuración de Pages, build, subida del artefacto `docs` y despliegue mediante
+  las acciones oficiales de GitHub Pages (`configure-pages@v5`,
+  `upload-pages-artifact@v4` y `deploy-pages@v4`).
 - El workflow tendrá permisos mínimos: `contents: read`, `pages: write` e
   `id-token: write`, además de la concurrencia para evitar publicaciones simultáneas.
 - Se eliminará el script `deploy` basado en `gh-pages` y la dependencia de `gh-pages`,
@@ -82,4 +85,3 @@ despliegue solo empaqueta los archivos estáticos.
   exista.
 - Revisar el diff para confirmar que solo se modifican la configuración de build,
   el workflow y los artefactos `docs` regenerados.
-
