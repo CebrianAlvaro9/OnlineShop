@@ -1,8 +1,11 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 
-// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: "https://CebrianAlvaro9.github.io/OnlineShop",
+  base: "/OnlineShop/",
+  build: {
+    outDir: "docs",
+    emptyOutDir: false,
+  },
 });
